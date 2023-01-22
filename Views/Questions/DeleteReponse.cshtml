@@ -1,0 +1,42 @@
+﻿@model testest.Models.Reponse
+
+@{
+    ViewBag.Title = "DeleteReponse";
+}
+
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Editer une réponse </h3>
+    <h4>Etes-vous sure de vouloir supprimer cette réponse ?</h4>
+
+</div>
+<div style="margin-left:28%">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Texte de la réponse
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.texte)
+        </dd>
+
+        <dt>
+           Correcte
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.correcte)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm("DeleteReponse","Questions", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Retour", "ToutesLesReponses", new { id = Model.Id }, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

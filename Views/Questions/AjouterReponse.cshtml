@@ -1,0 +1,52 @@
+﻿@model testest.Models.ReponseViewModel
+
+@{
+    ViewBag.Title = "AjouterReponse";
+}
+
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <div><h4> <i class="fa fa-plus"></i> Ajouter un choix de réponse </h4></div>
+    <hr />
+    <h5><strong>- Question : @Model.question.texte -</strong></h5>
+    <h5>Choix de réponses pour cette question :<strong> @Model.question.Reponse.Count</strong></h5>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="margin-left:28%">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <label  style="font-size:medium" class="control-label col-md-2">Texte de la réponse</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.reponse.texte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.reponse.texte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-2" style="font-size:medium">Correcte</label>
+            <div class="col-md-10">
+                <select class="form-control" name="select">
+                    <option value="1" selected>Oui</option>
+                    <option value="0">Non</option>
+                </select>
+                @Html.ValidationMessageFor(model => model.reponse.correcte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Créer" class="btn btn-success form-control" /><br /><br />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Voir toutes le réponses", "ToutesLesReponses", new { id = Model.question.Id }, new { @class = "btn btn-warning" })
+</div>

@@ -1,0 +1,61 @@
+﻿@model testest.Models.Reponse
+
+@{
+    ViewBag.Title = "EditReponse";
+}
+
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Editer une réponse </h3>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="margin-left:28%">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            <label style="font-size:medium" class="control-label col-md-2">Texte de la réponse</label>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.texte, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.texte, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label style="font-size:medium" class="control-label col-md-2">Correcte</label>
+            <div class="col-md-10">
+                @if (Model.correcte[3] == Convert.ToByte(1))
+                {
+                    <select name="select" class="form-control">
+                        <option value="0">Non</option>
+                        <option value="1" selected>Oui</option>
+                    </select>
+                }
+                else
+                {
+                    <select name="select" class="form-control">
+
+                        <option value="0" selected>Non</option>
+                        <option value="1">Oui</option>
+                    </select>
+
+                }
+
+                @Html.ValidationMessageFor(model => model.correcte, "", new { @class = "text-danger" })
+            </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Enregistrer" class="btn btn-success form-control" />
+                </div>
+            </div>
+            </div>
+        }
+<div>
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
+</div>

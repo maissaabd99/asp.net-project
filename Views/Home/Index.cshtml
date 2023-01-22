@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    <style>
+        .wordCarousel {
+            //font-size: 36px;
+            font-weight: 700;
+            color: #eee;
+            div
+
+        {
+            display: block;
+            // left: 10%;
+            //width:auto;
+            overflow: hidden;
+            position: relative;
+            // float: left;
+            height: 65px;
+            padding-top: 10px;
+            margin-top: -10px;
+            li
+
+        {
+            // font-family: Serif;
+            color: #eee;
+            // font-size: 50px;
+            color: purple;
+            // background-color: white;
+            font-weight: 900;
+            margin-left: -48px;
+            padding: 0 10px;
+            height: 45px;
+            margin-bottom: 45px;
+            display: block;
+        }
+
+        }
+        }
+        .flip2 {
+            animation: flip2 6s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+        }
+
+        .flip3 {
+            animation: flip3 8s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+        }
+
+        .flip4 {
+            animation: flip4 10s cubic-bezier(0.23, 1, 0.32, 1.2) infinite;
+        }
+    </style>
+}
+<body>
+    <div style="background: rgba(145, 61, 136, 0.6); width: 100%; height: 50%; ">
+        <div class ="jumbotron" style="color: white; width: 100%; height: 50%; background-image: url('../../Images/11.jpg'); background-repeat: no-repeat; background-size: cover; opacity: 0.7;">
+            <h1>MS-E-Hire</h1>
+            <h2 class="wordCarousel">
+                <span style="color:white">Rejoignez-Nous Pour Une Meilleure Expérience !</span>
+            </h2>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap; align-items: center">
+        <img src="~/Images/logo-black.png" alt="Site Logo" style="height:180px; width: 180px" />
+    </div>
+</body>

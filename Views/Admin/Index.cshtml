@@ -1,0 +1,77 @@
+﻿@using testest.Models
+@model  IEnumerable<testest.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Gérer les utilisateurs de l'application  </h3>
+</div>
+<p style="float:right">
+    @Html.ActionLink("Créer", "Create", null, new { @class = "btn btn-success" })
+</p>
+
+<table class="striped responsive-table highlight centered">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                Actions
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <br />
+    <tbody>
+        <br />
+        @foreach (var item in Model)
+        {
+
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td style="color:white">
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn  fa fa-pencil" })
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn btn-default fa fa-list" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger fa fa-trash" })
+                    @Html.ActionLink(" Affecter", "Affecter_Test", new { id = item.Id }, new { @class = "btn btn-default float-right" })
+                </td>
+
+            </tr>
+
+        }
+    </tbody>
+
+</table>
+<script src="https://kit.fontawesome.com/a9aa160619.js" crossorigin="anonymous"></script>
+
+

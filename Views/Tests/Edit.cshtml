@@ -1,0 +1,56 @@
+﻿@model testest.Models.Test
+
+@{
+    ViewBag.Title = "Edit";
+}
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <div><h4> <i class="fa fa-list"></i> Editer un Test QCM</h4></div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal" style="margin-left:28%">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.titreTest, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.titreTest, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.titreTest, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nbrQuestion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.nbrQuestion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.nbrQuestion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.duree, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.duree, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.duree, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Enregistrer" class="btn btn-success  form-control" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Retour", "Index", "", new { @class = "btn btn-default" })
+</div>

@@ -1,0 +1,62 @@
+﻿@model testest.Models.Test
+
+@{
+    ViewBag.Title = "Détails du Test QCM";
+}
+<!----head>
+    <link type="text/css" rel="stylesheet" href=" ~/fonts/materialize.css" />
+    <link type="text/css" rel="stylesheet" href=" ~/fonts/materialize.min.css" />
+    <script type="text/javascript" src="~/Scripts/materialize.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/materialize.js"></script>
+</head-->
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">
+        QCM @Html.DisplayFor(model => model.titreTest)
+    </h3>
+</div>
+<div>
+    <hr />
+    <div class="alert alert-warning" role="alert">
+        <i class="fa fa-exclamation" style="float:right"></i>
+        <br />
+        <ol style="color:black">
+            <li>Cochez lisiblement les cases des réponses que vous jugez correctes</li>
+            <li>Ces questions à choix multiples peuvenet avoir une ou plusieurs bonnes réponses</li>
+            <li>Toutes les bonnes réponses doivenet être cochées pour que la question soit validée entiérement</li>
+            <li>Si vous cochez une fausses réponse, la question sera rejeté entièrement</li>
+        </ol>
+    </div>
+
+    <hr />
+    <dl class="dl-horizontal" style="display: flex; justify-content: space-around; flex-direction: column; flex-wrap: nowrap;align-items:center">
+        <div>
+            <dt>
+                <i class="fa fa-question"></i> <h4>Questions</h4>
+
+            </dt>
+            <dd>
+                <h2 style="color:sandybrown">@Html.DisplayFor(model => model.nbrQuestion)</h2>
+            </dd>
+        </div>
+
+        <div>
+            <dt>
+                <i class="fa fa-clock"></i> <h4> Durée </h4>
+            <dd>
+                <h2 style="color:sandybrown">@Html.DisplayFor(model => model.duree) min </h2>
+            </dd>
+            </dt>
+        </div>
+        <br />
+        <div>
+            <button class="btn btn-success">Passer maintenant</button>
+
+            @Html.ActionLink("Pas maintenant", "MesTestsQCM", "Candidat", null, new { @class = "btn btn-default" })
+
+        </div>
+
+       
+
+</div>
+

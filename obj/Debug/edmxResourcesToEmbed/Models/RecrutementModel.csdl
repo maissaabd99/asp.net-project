@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="RecrutementModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="RecrutementModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Test" EntityType="RecrutementModel.Test" />
+    <EntitySet Name="Question" EntityType="RecrutementModel.Question" />
+    <EntitySet Name="Reponse" EntityType="RecrutementModel.Reponse" />
+    <AssociationSet Name="TestQuestion" Association="RecrutementModel.TestQuestion">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="Question" EntitySet="Question" />
+    </AssociationSet>
+    <AssociationSet Name="CandidatTest" Association="RecrutementModel.CandidatTest">
+      <End Role="Candidat" EntitySet="UserSet" />
+      <End Role="Test" EntitySet="Test" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionReponse" Association="RecrutementModel.QuestionReponse">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="Reponse" EntitySet="Reponse" />
+    </AssociationSet>
+    <EntitySet Name="UserSet" EntityType="RecrutementModel.User" />
+  </EntityContainer>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" Nullable="false" />
+    <Property Name="prenom" Type="String" Nullable="false" />
+    <Property Name="email" Type="String" Nullable="false" />
+    <Property Name="password" Type="String" Nullable="false" />
+    <Property Name="dateNaissance" Type="String" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Admin" BaseType="RecrutementModel.User" />
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nbrQuestion" Type="Int32" Nullable="false" />
+    <Property Name="titreTest" Type="String" Nullable="false" />
+    <Property Name="duree" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Questions" Relationship="RecrutementModel.TestQuestion" FromRole="Test" ToRole="Question" />
+    <NavigationProperty Name="Candidats" Relationship="RecrutementModel.CandidatTest" FromRole="Test" ToRole="Candidat" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="question" Type="String" Nullable="false" />
+    <Property Name="noteTotale" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Tests" Relationship="RecrutementModel.TestQuestion" FromRole="Question" ToRole="Test" />
+    <NavigationProperty Name="Reponses" Relationship="RecrutementModel.QuestionReponse" FromRole="Question" ToRole="Reponse" />
+  </EntityType>
+  <EntityType Name="Reponse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="reponse" Type="String" Nullable="false" />
+    <Property Name="correcte" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Question" Relationship="RecrutementModel.QuestionReponse" FromRole="Reponse" ToRole="Question" />
+  </EntityType>
+  <EntityType Name="Candidat" BaseType="RecrutementModel.User">
+    <NavigationProperty Name="Tests" Relationship="RecrutementModel.CandidatTest" FromRole="Candidat" ToRole="Test" />
+  </EntityType>
+  <Association Name="TestQuestion">
+    <End Type="RecrutementModel.Test" Role="Test" Multiplicity="*" />
+    <End Type="RecrutementModel.Question" Role="Question" Multiplicity="*" />
+  </Association>
+  <Association Name="CandidatTest">
+    <End Type="RecrutementModel.Candidat" Role="Candidat" Multiplicity="*" />
+    <End Type="RecrutementModel.Test" Role="Test" Multiplicity="*" />
+  </Association>
+  <Association Name="QuestionReponse">
+    <End Type="RecrutementModel.Question" Role="Question" Multiplicity="1" />
+    <End Type="RecrutementModel.Reponse" Role="Reponse" Multiplicity="*" />
+  </Association>
+</Schema>

@@ -1,0 +1,78 @@
+﻿@model IEnumerable<testest.Models.Test_Question>
+
+@{
+    ViewBag.Title = "Details";
+}
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <div><h4> <i class="fa fa-list"></i> Détails du Test</h4></div>
+</div>
+
+<div>
+    <hr />
+    <table class="striped responsive-table highlight">
+        <thead>
+            <tr>
+                <td> <span style="font-weight:bold">Titre du Test QCM</span></td>
+                <td> <span style="font-weight:bold">Nombre de questions</span> </td>
+                <td><span style="font-weight:bold">Durée en minutes </span></td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> @Html.DisplayFor(model => model.ToList()[0].Test.titreTest) </td>
+                <td> @Html.DisplayFor(model => model.ToList()[0].Test.nbrQuestion)</td>
+                <td> @Html.DisplayFor(model => model.ToList()[0].Test.duree)</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container">
+        <div class="accordion" id="accordionExample">
+            @foreach (var item in Model)
+            {
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="@item.Id">
+
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="@item.Question.Id">
+                            @item.Question.texte
+                        </button>
+                    </h2>
+                    <div id="@item.Question.Id" class="accordion-collapse collapse show" aria-labelledby="@item.Id" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <ul>
+                                @foreach (var rep in item.Question.Reponse)
+                                {
+                                    if (rep.correcte[3] == Convert.ToByte(1))
+                                    {
+                                        <li><input class="form-check-input" type="checkbox"  id="@rep.Id" checked /> @rep.texte</li>
+                                    }
+                                    else
+                                    {
+                                        <li><input class="form-check-input" type="checkbox" id="@rep.Id" /> @rep.texte</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+</div>
+<br />
+<p class="text-center">
+    @Html.ActionLink(" Edit", "Edit", new { id = Model.ToList()[0].Test.Id }, new { @class = "btn fa fa-pencil" })
+    @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-default" })
+</p>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script>
+    var myCollapse = document.getElementById('myCollapse')
+    var bsCollapse = new bootstrap.Collapse(myCollapse, {
+        toggle: false
+    })
+</script>

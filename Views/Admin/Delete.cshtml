@@ -1,0 +1,68 @@
+﻿@model testest.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Delete";
+}
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+</div>
+    <br />
+    <h4>Etes-vous sur de vouloir supprimer cet utilisateur ?</h4>
+    <div style="margin-left:28%">
+
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nom)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nom)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prenom)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.DateNaissance)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DateNaissance)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UserName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserName)
+            </dd>
+            <br />
+            <dd>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-actions no-color">
+                        <input type="submit" value="Supprimer" class="btn btn-danger" />
+                        @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-default" })
+                    </div>
+
+
+                }
+    </div>

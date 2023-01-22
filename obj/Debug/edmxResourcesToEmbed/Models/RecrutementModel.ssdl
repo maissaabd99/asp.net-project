@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RecrutementModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="RecrutementModelStoreContainer">
+    <EntitySet Name="Test" EntityType="RecrutementModel.Store.Test" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Question" EntityType="RecrutementModel.Store.Question" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Reponse" EntityType="RecrutementModel.Store.Reponse" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet" EntityType="RecrutementModel.Store.UserSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet_Candidat" EntityType="RecrutementModel.Store.UserSet_Candidat" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserSet_Admin" EntityType="RecrutementModel.Store.UserSet_Admin" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="TestQuestion" EntityType="RecrutementModel.Store.TestQuestion" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CandidatTest" EntityType="RecrutementModel.Store.CandidatTest" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_TestQuestion_Test" Association="RecrutementModel.Store.FK_TestQuestion_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="TestQuestion" EntitySet="TestQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TestQuestion_Question" Association="RecrutementModel.Store.FK_TestQuestion_Question">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="TestQuestion" EntitySet="TestQuestion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CandidatTest_Candidat" Association="RecrutementModel.Store.FK_CandidatTest_Candidat">
+      <End Role="Candidat" EntitySet="UserSet_Candidat" />
+      <End Role="CandidatTest" EntitySet="CandidatTest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CandidatTest_Test" Association="RecrutementModel.Store.FK_CandidatTest_Test">
+      <End Role="Test" EntitySet="Test" />
+      <End Role="CandidatTest" EntitySet="CandidatTest" />
+    </AssociationSet>
+    <AssociationSet Name="QuestionReponse" Association="RecrutementModel.Store.QuestionReponse">
+      <End Role="Question" EntitySet="Question" />
+      <End Role="Reponse" EntitySet="Reponse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Candidat_inherits_User" Association="RecrutementModel.Store.FK_Candidat_inherits_User">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Candidat" EntitySet="UserSet_Candidat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Admin_inherits_User" Association="RecrutementModel.Store.FK_Admin_inherits_User">
+      <End Role="User" EntitySet="UserSet" />
+      <End Role="Admin" EntitySet="UserSet_Admin" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Test">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nbrQuestion" Type="int" Nullable="false" />
+    <Property Name="titreTest" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="duree" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Question">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="question" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="noteTotale" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Reponse">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="reponse" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="correcte" Type="bit" Nullable="false" />
+    <Property Name="Question_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="prenom" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="dateNaissance" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet_Candidat">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserSet_Admin">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TestQuestion">
+    <Key>
+      <PropertyRef Name="Tests_Id" />
+      <PropertyRef Name="Questions_Id" />
+    </Key>
+    <Property Name="Tests_Id" Type="int" Nullable="false" />
+    <Property Name="Questions_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CandidatTest">
+    <Key>
+      <PropertyRef Name="Candidats_Id" />
+      <PropertyRef Name="Tests_Id" />
+    </Key>
+    <Property Name="Candidats_Id" Type="int" Nullable="false" />
+    <Property Name="Tests_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="QuestionReponse">
+    <End Role="Question" Type="RecrutementModel.Store.Question" Multiplicity="1" />
+    <End Role="Reponse" Type="RecrutementModel.Store.Reponse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Reponse">
+        <PropertyRef Name="Question_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQuestion_Test">
+    <End Role="Test" Type="RecrutementModel.Store.Test" Multiplicity="1" />
+    <End Role="TestQuestion" Type="RecrutementModel.Store.TestQuestion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestQuestion">
+        <PropertyRef Name="Tests_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TestQuestion_Question">
+    <End Role="TestQuestion" Type="RecrutementModel.Store.TestQuestion" Multiplicity="*" />
+    <End Role="Question" Type="RecrutementModel.Store.Question" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Question">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TestQuestion">
+        <PropertyRef Name="Questions_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CandidatTest_Candidat">
+    <End Role="Candidat" Type="RecrutementModel.Store.UserSet_Candidat" Multiplicity="1" />
+    <End Role="CandidatTest" Type="RecrutementModel.Store.CandidatTest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidatTest">
+        <PropertyRef Name="Candidats_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CandidatTest_Test">
+    <End Role="CandidatTest" Type="RecrutementModel.Store.CandidatTest" Multiplicity="*" />
+    <End Role="Test" Type="RecrutementModel.Store.Test" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Test">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CandidatTest">
+        <PropertyRef Name="Tests_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Candidat_inherits_User">
+    <End Role="User" Type="RecrutementModel.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Candidat" Type="RecrutementModel.Store.UserSet_Candidat" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Candidat">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Admin_inherits_User">
+    <End Role="User" Type="RecrutementModel.Store.UserSet" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Admin" Type="RecrutementModel.Store.UserSet_Admin" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Admin">
+        <PropertyRef Name="Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

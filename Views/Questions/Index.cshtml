@@ -1,0 +1,62 @@
+﻿@model IEnumerable<testest.Models.Question>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Gérer les Questions</h3>
+</div>
+
+<p style="float:right">
+    @Html.ActionLink("Créer", "Create", null, new {@class ="btn btn-success"})
+</p>
+<table class="striped responsive-table highlight centered">
+    <thead>
+        <tr>
+            <th>
+                Question
+            </th>
+            <th>
+                Note Totale
+            </th>
+            <th>Choix de réponses</th>
+            <th>Affectée au Tests</th>
+            <th>Actions</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.texte)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.noteTotale) points
+                </td>
+                <td>
+                    @item.Reponse.Count
+                </td>
+                <td>
+                    <select class="form-control" name="select">
+                        @foreach (var testquest in item.Test_Question)
+                        {
+                            <option>@testquest.Test.titreTest</option>
+                        }
+                    </select>
+                </td>
+                
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn fa fa-pencil" })
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn btn-default fa fa-list" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger fa fa-trash" })
+                    @Html.ActionLink(" Réponses", "AjouterReponse", new { id = item.Id }, new { @class = "btn btn-default fa fa-plus" })
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

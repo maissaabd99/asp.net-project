@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RecrutementModelStoreContainer" CdmEntityContainer="RecrutementModelContainer">
+    <EntitySetMapping Name="Test">
+      <EntityTypeMapping TypeName="IsTypeOf(RecrutementModel.Test)">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nbrQuestion" ColumnName="nbrQuestion" />
+          <ScalarProperty Name="titreTest" ColumnName="titreTest" />
+          <ScalarProperty Name="duree" ColumnName="duree" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Question">
+      <EntityTypeMapping TypeName="IsTypeOf(RecrutementModel.Question)">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="question" ColumnName="question" />
+          <ScalarProperty Name="noteTotale" ColumnName="noteTotale" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reponse">
+      <EntityTypeMapping TypeName="IsTypeOf(RecrutementModel.Reponse)">
+        <MappingFragment StoreEntitySet="Reponse">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="reponse" ColumnName="reponse" />
+          <ScalarProperty Name="correcte" ColumnName="correcte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserSet">
+      <EntityTypeMapping TypeName="IsTypeOf(RecrutementModel.User)">
+        <MappingFragment StoreEntitySet="UserSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="dateNaissance" ColumnName="dateNaissance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(RecrutementModel.Candidat)">
+        <MappingFragment StoreEntitySet="UserSet_Candidat">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="IsTypeOf(RecrutementModel.Admin)">
+        <MappingFragment StoreEntitySet="UserSet_Admin">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="TestQuestion" TypeName="RecrutementModel.TestQuestion" StoreEntitySet="TestQuestion">
+      <EndProperty Name="Test">
+        <ScalarProperty Name="Id" ColumnName="Tests_Id" />
+      </EndProperty>
+      <EndProperty Name="Question">
+        <ScalarProperty Name="Id" ColumnName="Questions_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="CandidatTest" TypeName="RecrutementModel.CandidatTest" StoreEntitySet="CandidatTest">
+      <EndProperty Name="Candidat">
+        <ScalarProperty Name="Id" ColumnName="Candidats_Id" />
+      </EndProperty>
+      <EndProperty Name="Test">
+        <ScalarProperty Name="Id" ColumnName="Tests_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="QuestionReponse" TypeName="RecrutementModel.QuestionReponse" StoreEntitySet="Reponse">
+      <EndProperty Name="Question">
+        <ScalarProperty Name="Id" ColumnName="Question_Id" />
+      </EndProperty>
+      <EndProperty Name="Reponse">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

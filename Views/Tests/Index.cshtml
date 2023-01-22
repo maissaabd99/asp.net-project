@@ -1,0 +1,53 @@
+﻿@model  IEnumerable<testest.Models.Test>
+
+@{
+    ViewBag.Title = "Index";
+}
+<script src="https://kit.fontawesome.com/a9aa160619.js" crossorigin="anonymous"></script>
+<<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Gérer les Tests QCM</h3>
+</div>
+
+<p style="float:right">
+    @Html.ActionLink("Créer", "Create", "", new { @class = "btn btn-success" })
+</p>
+<table class="striped responsive-table highlight centered">
+    <thead>
+        <tr>
+            <th>
+                Titre du test QCM
+            </th>
+            <th>
+                Nombre de questions
+            </th>
+            <th>
+                Durée du Test en minutes
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.titreTest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nbrQuestion)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.duree)
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "Edit", new { id = item.Id }, new { @class = "btn fa fa-edit" })
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn btn-default fa fa-list" })
+                    @Html.ActionLink(" ", "Delete", new { id = item.Id }, new { @class = "btn btn-danger fa fa-trash" })
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

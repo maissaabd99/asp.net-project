@@ -1,0 +1,54 @@
+﻿@using testest.Models
+@model IEnumerable<testest.Models.Resultat_Test>
+
+@{
+    ViewBag.Title = "Mes Tests QCM";
+}
+<style type="text/css">
+    .Link {
+        padding:9px
+    }
+</style>
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Suivi de mes Tests QCM   </h3>
+</div>
+<br />
+<br />
+
+<table class="striped responsive-table centered">
+    <thead class="thead-light">
+        <tr>
+            <th>
+                Tite du Test QCM
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_affectation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.date_expiration)
+            </th>
+            <th> Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Test.titreTest)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_affectation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.date_expiration)
+                </td>
+                <td>
+                    @Html.ActionLink("Voir le Test", "DetailsTest", "Candidat", new { id = item.Test.Id }, new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

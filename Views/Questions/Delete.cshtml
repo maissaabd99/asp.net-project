@@ -1,0 +1,42 @@
+﻿@model testest.Models.Question
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Supprimer une question </h3>
+    <h4>Etes-vous sure de vouloir supprimer cette question ?</h4>
+
+</div>
+<div style="margin-left:28%">
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+           Texte de la question
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.texte)
+        </dd>
+
+        <dt>
+           Note totale
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.noteTotale)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger form-control" />
+            @Html.ActionLink("Retour", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<testest.Models.Reponse>
+
+@{
+    ViewBag.Title = "ToutesLesReponses";
+}
+
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <h3 style="font-weight:bold;padding: 10px;border-bottom: 3px solid grey; text-align: center">Choix de réponses </h3>
+    <!--><strong>Question : @Model.ToList()[0].Question.texte</strong></!--h5>-->
+</div>
+<p style="float:right">
+    @Html.ActionLink("Nouvelle réponse", "AjouterReponse",new { id = Model.ToList()[0].Question.Id }, new { @class = "btn btn-success" })
+</p>
+<table class="striped responsive-table highlight centered">
+    <thead>
+        <tr>
+            <th>
+                Texte de le réponse
+            </th>
+            <th>
+                Réponse correcte
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.texte)
+                </td>
+                <td>
+                    @if (item.correcte[3] == Convert.ToByte(1))
+                    {
+                        <span style="color:green"> <i class="fa fa-check"></i> Oui</span>
+                    }
+
+                    else
+                    {
+                        <span style="color:red">  <i class="fa fa-close"></i> Non</span>
+                        <input type="checkbox" disabled />
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink(" ", "EditReponse", new { id = item.Id }, new { @class = "btn fa fa-pencil" })
+                    @Html.ActionLink(" ", "Details", new { id = item.Id }, new { @class = "btn btn-default fa fa-list" })
+                    @Html.ActionLink(" ", "DeleteReponse", new { id = item.Id }, new { @class = "btn btn-danger fa fa-trash" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

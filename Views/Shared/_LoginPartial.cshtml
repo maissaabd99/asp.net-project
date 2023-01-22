@@ -1,0 +1,30 @@
+﻿<script src="https://kit.fontawesome.com/a9aa160619.js" crossorigin="anonymous"></script>@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li>
+               
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="fa fa-login">
+                    Se déconnecter
+                </a>
+            </li>
+        </ul>
+    }
+}
+else
+{
+<ul class="nav navbar-nav navbar-right">
+    
+    <li>
+        @Html.ActionLink(" S'inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+    </li>
+    <li>@Html.ActionLink(" Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "fa fa-user" })</li>
+</ul>
+}

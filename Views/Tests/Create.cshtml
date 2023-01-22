@@ -1,0 +1,54 @@
+﻿@model testest.Models.Test
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+@using (Html.BeginForm())
+{
+    <br />
+    <div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+        <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+        <div><h4> <i class="fa fa-plus"></i> Créer un nouveau Test QCM </h4></div>
+    </div>
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="margin-left:28%">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <p class="control-label col-md-2 font-weight-bold">Nombre de questions</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nbrQuestion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nbrQuestion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2 font-weight-bold">Titre de Test QCM</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.titreTest, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.titreTest, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <p class="control-label col-md-2 font-weight-bold">Durée du Test QCM (en minutes)</p>
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.duree, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.duree, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Créer" class="btn btn-success form-control"  />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Retour", "Index","Tests", new { @class = "btn btn-default" })
+</div>

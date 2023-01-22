@@ -1,0 +1,40 @@
+﻿@model testest.Models.ApplicationUser
+
+@{
+    ViewBag.Title = "Details";
+}
+<style type="text/css">
+    .Link {
+        padding: 9px
+    }
+</style>
+<br />
+<div style="display: flex; justify-content: center; flex-direction: column; flex-wrap: nowrap;align-items:center">
+    <img src="~/Images/logo-black.png" alt="Site Logo" style="height:80px; width: 80px" />
+    <div><h4> <i class="fa fa-list"></i> Détails de l'utilisateur</h4></div>
+</div>
+<hr />
+<div class="row" style="margin-left:0%">
+    <table class="striped responsive-table highlight">
+        <tr>
+            <td> <span style="font-weight:bold">@Html.DisplayNameFor(model => model.Nom)</span></td> : <td> @Html.DisplayFor(model => model.Nom) </td>
+        </tr>
+        <tr>
+            <td> <span style="font-weight:bold">@Html.DisplayNameFor(model => model.Prenom)</span></td> : <td> @Html.DisplayFor(model => model.Prenom)</td>
+           
+        </tr>
+        <tr>
+            <td><span style="font-weight:bold">@Html.DisplayNameFor(model => model.DateNaissance) </span></td> : <td> @Html.DisplayFor(model => model.DateNaissance)</td>
+        </tr>
+        <tr>
+            <td> <span style="font-weight:bold"> @Html.DisplayNameFor(model => model.Email)</span></td> :  <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>
+        <tr>
+            <td> <span style="font-weight:bold">@Html.DisplayNameFor(model => model.UserName) </span></td> : <td> @Html.DisplayFor(model => model.UserName)</td>
+        </tr>
+    </table>
+</div>
+<p class="text-center">
+    @Html.ActionLink(" ", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary fa fa-pencil Link" }) 
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
+</p>
